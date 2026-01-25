@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,146 +10,96 @@
 
 <title>Snowfall last 72 hours - Maryland</title>
 
-
 <style>
-body {
-  font-family: "Noto Sans", sans-serif;
-  margin:0;
-  padding:0;
-  max-width:709px;
-}
-
-
-
-h4 {
-margin-bottom:5px;
-text-align: center;
-font-size:1.1em;
-}
-#wrap {
-width:99%;
-height:548px;
-border:1px solid #ccc;
-display: flex;
-  align-items: center; 
-  background:white;
+  body {
+    font-family: "Noto Sans", sans-serif;
+    margin:0;
+    padding:0;
+    max-width:709px;
   }
-#map {
-width: 100%;
-}
-#legend {
-margin: 25px auto 0 auto;
-width: 300px;
-display: block;
-}
 
+  h4 {
+    margin-bottom:5px;
+    text-align: center;
+    font-size:1.1em;
+  }
+  #wrap {
+    width:99%;
+    height:548px;
+    border:1px solid #ccc;
+    display: flex;
+    align-items: center; 
+    background:white;
+  }
+  #map {
+    width: 100%;
+  }
+  #legend {
+    margin: 25px auto 0 auto;
+    width: 300px;
+    display: block;
+  }
 
-@media screen and (min-width: 400px) {
-#legend {
-width: 320px;
-}
-}
-
-
-@media screen and (min-width: 650px) {
-
-#credit {
-margin-top:10px;
-}
-}
-
-
-
-@media screen and (min-width: 680px) {
-#legend {
-margin-top:10px;
-}
-
-}
-
-
-@media screen and (min-width: 695px) {
-#credit {
-margin-top:15px;
-}
-
-}
-
-
-@media screen and (min-width: 708px) {
-#legend {
-margin-top:0px;
-}
-}
-
+  @media screen and (min-width: 400px) { #legend { width: 320px; } }
+  @media screen and (min-width: 650px) { #credit { margin-top:10px; } }
+  @media screen and (min-width: 680px) { #legend { margin-top:10px; } }
+  @media screen and (min-width: 695px) { #credit { margin-top:15px; } }
+  @media screen and (min-width: 708px) { #legend { margin-top:0px; } }
 </style>
 
 <script>
-
   async function updateDateDisplay() {
-  try {
-    // Fetch the JSON file 
-    const response = await fetch('/timestamp.json');
-    const data = await response.json();
-    
- async function updateDateDisplay() {
-  try {
-    const response = await fetch('./timestamp.json');
-    const data = await response.json();
-    const utcDate = new Date(data.timestamp);
+    try {
+      // Fetch the JSON file (using ./ ensures it looks in the same folder)
+      const response = await fetch('./timestamp.json');
+      if (!response.ok) throw new Error('File not found');
+      
+      const data = await response.json();
+      const utcDate = new Date(data.timestamp);
 
-    // Use Intl.DateTimeFormat to get parts of the date in Eastern Time
-    const formatter = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'America/New_York',
-      hour: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour12: true
-    });
+      // Use Intl.DateTimeFormat to get parts of the date in Eastern Time
+      const formatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York',
+        hour: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour12: true
+      });
 
-    // Break the date into parts (hour, dayPeriod, month, day)
-    const parts = formatter.formatToParts(utcDate);
-    const getPart = (type) => parts.find(p => p.type === type).value;
+      const parts = formatter.formatToParts(utcDate);
+      const getPart = (type) => parts.find(p => p.type === type).value;
 
-    const hour = getPart('hour');
-    const day = getPart('day');
-    const month = getPart('month'); // e.g., "Jan"
-    
-    // Convert "AM/PM" to "a.m./p.m."
-    const period = getPart('dayPeriod').toLowerCase().split('').join('.') + '.';
+      const hour = getPart('hour');
+      const day = getPart('day');
+      const month = getPart('month'); 
+      
+      // Convert "AM/PM" to "a.m./p.m."
+      const period = getPart('dayPeriod').toLowerCase().split('').join('.') + '.';
 
-    // Assemble: "7 p.m. Jan. 24"
-    const finalString = `${hour} ${period} ${month}. ${day}`;
-    
-    document.getElementById('date-target').innerText = finalString;
-  } catch (err) {
-    console.error("Error formatting date:", err);
+      // Assemble: "7 p.m. Jan. 24"
+      const finalString = `${hour} ${period} ${month}. ${day}`;
+      
+      document.getElementById('date-target').innerText = finalString;
+    } catch (err) {
+      console.error("Error formatting date:", err);
+    }
   }
-}
-}
 
-document.addEventListener('DOMContentLoaded', updateDateDisplay);
+  document.addEventListener('DOMContentLoaded', updateDateDisplay);
 </script>
-
-  
 </head>
+<body>
 
-
-</body>
-<h4>Snowfall (72 hours precending <span id="date-target"></span>)</h4>
-
-
+<h4>Snowfall (72 hours preceding <span id="date-target">...</span>)</h4>
 
 <div id="wrap">
-<div id="elems">
-<img id="map" src="https://www.nohrsc.noaa.gov/interactive/html/map_only.php?var=snowfall_72_h&min_x=-79.650000000002&min_y=37.524999999996&max_x=-74.925000000002&max_y=40.183333333329&bgvar=dem&shdvar=shading&title=1&width=800&height=450&font=0&lbl=m&palette=0&h_o=0&metric=0&snap=1&extents=us&o9=1&o11=1&o13=1" alt="Map of Maryland visualizing snowfall over last 72 hours">
-<img id="legend"  src="https://baltimore-sun.github.io/timeline/images/noaalegend.png" alt="snowfall map legend">
+  <div id="elems">
+    <img id="map" src="https://www.nohrsc.noaa.gov/interactive/html/map_only.php?var=snowfall_72_h&min_x=-79.650000000002&min_y=37.524999999996&max_x=-74.925000000002&max_y=40.183333333329&bgvar=dem&shdvar=shading&title=1&width=800&height=450&font=0&lbl=m&palette=0&h_o=0&metric=0&snap=1&extents=us&o9=1&o11=1&o13=1" alt="Map of Maryland visualizing snowfall over last 72 hours">
+    <img id="legend" src="https://baltimore-sun.github.io/timeline/images/noaalegend.png" alt="snowfall map legend">
+  </div>
 </div>
-</div>
+
 <div id="credit" style="font-size:.75em;color:#848484;">SOURCE: NOAA/National Operational Hydrologic Remote Sensing Center</div>
+
 </body>
-
-
-
-
 </html>
