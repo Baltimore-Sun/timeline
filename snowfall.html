@@ -92,11 +92,40 @@ margin-top:0px;
     const response = await fetch('./timestamp.json');
     const data = await response.json();
     
-    // Get for HTML
-    document.getElementById('date-target').innerText = data.timestamp;
+ async function updateDateDisplay() {
+  try {
+    const response = await fetch('./timestamp.json');
+    const data = await response.json();
+    const utcDate = new Date(data.timestamp);
+
+    // Use Intl.DateTimeFormat to get parts of the date in Eastern Time
+    const formatter = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      hour: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour12: true
+    });
+
+    // Break the date into parts (hour, dayPeriod, month, day)
+    const parts = formatter.formatToParts(utcDate);
+    const getPart = (type) => parts.find(p => p.type === type).value;
+
+    const hour = getPart('hour');
+    const day = getPart('day');
+    const month = getPart('month'); // e.g., "Jan"
+    
+    // Convert "AM/PM" to "a.m./p.m."
+    const period = getPart('dayPeriod').toLowerCase().split('').join('.') + '.';
+
+    // Assemble: "7 p.m. Jan. 24"
+    const finalString = `${hour} ${period} ${month}. ${day}`;
+    
+    document.getElementById('date-target').innerText = finalString;
   } catch (err) {
-    console.error("Error loading timestamp:", err);
+    console.error("Error formatting date:", err);
   }
+}
 }
 
 document.addEventListener('DOMContentLoaded', updateDateDisplay);
@@ -107,7 +136,7 @@ document.addEventListener('DOMContentLoaded', updateDateDisplay);
 
 
 </body>
-<h4>Depth of recent snowfall</h4>
+<h4>Depth of recent snowfall (72 hours ending <span id="date-target"></span>)</h4>
 
 
 
