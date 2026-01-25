@@ -39,20 +39,6 @@
     width: 300px;
     display: block;
   }
-#date-target {
-  display: inline-block;
-  min-width: 100px; 
-  vertical-align: bottom;
-}
-
-#date-target:not(:empty) {
-  animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
   @media screen and (min-width: 400px) { #legend { width: 320px; } }
   @media screen and (min-width: 650px) { #credit { margin-top:10px; } }
   @media screen and (min-width: 680px) { #legend { margin-top:10px; } }
@@ -103,7 +89,7 @@
 </head>
 <body>
 
-<h4>Snowfall (72 hours preceding <span id="date-target">...</span>)</h4>
+<h4>Snowfall (72 hours preceding <span id="date-target">-- -- --- --</span>)</h4>
 
 <div id="wrap">
   <div id="elems">
