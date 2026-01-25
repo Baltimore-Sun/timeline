@@ -83,6 +83,26 @@ margin-top:0px;
 }
 
 </style>
+
+<script>
+
+  async function updateDateDisplay() {
+  try {
+    // Fetch the JSON file 
+    const response = await fetch('./timestamp.json');
+    const data = await response.json();
+    
+    // Get for HTML
+    document.getElementById('date-target').innerText = data.timestamp;
+  } catch (err) {
+    console.error("Error loading timestamp:", err);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', updateDateDisplay);
+</script>
+
+  
 </head>
 
 
