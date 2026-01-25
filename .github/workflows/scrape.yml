@@ -1,0 +1,32 @@
+name: Scrape NOAA Date
+
+on:
+  schedule:
+    - cron: '15 * * * *'
+  workflow_dispatch:   # Allows you to run it manually for testing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run scraper
+        run: python scrape.py
+
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add timestamp.json
+          git commit -m "Update NOAA timestamp" || exit 0
+          git push
