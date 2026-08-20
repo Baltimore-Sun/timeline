@@ -1,3 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 16 16">
+  <!-- Generator: Adobe Illustrator 30.7.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 114)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #00aec7;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path class="st0" d="M0,0h1v15h15v1H0V0ZM10,3.5c0-.28.22-.5.5-.5h4c.28,0,.5.22.5.5v4c0,.28-.22.5-.5.5s-.5-.22-.5-.5v-2.6l-3.61,4.42c-.18.21-.49.24-.7.07-.01-.01-.02-.02-.04-.03l-2.59-2.59-3.66,5.03c-.17.22-.49.25-.7.08-.21-.16-.25-.45-.11-.67l4-5.5c.16-.22.47-.27.7-.11.02.02.04.03.06.05l2.61,2.61,3.48-4.26h-2.94c-.28,0-.5-.22-.5-.5"/>
 </svg>

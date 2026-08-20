@@ -1,3 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 16 16">
+  <!-- Generator: Adobe Illustrator 30.7.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 114)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #00aec7;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path class="st0" d="M8,1.31c4.44-4.56,15.53,3.42,0,13.69C-7.53,4.74,3.56-3.25,8,1.31"/>
 </svg>
